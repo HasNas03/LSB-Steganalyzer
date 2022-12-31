@@ -1,3 +1,4 @@
+import Image
 
 class Embedder():
     """
@@ -14,9 +15,10 @@ class Embedder():
         self.length = len(text)
         self.image = image
 
-    def enough_pixels(self) -> int:
+    def enough_pixels(self) -> bool:
         """
+        Returns a Boolean of whether there are enough pixels in the image to
+        successfully embed the text
+        """
+        pixels_needed = self.length * 8
 
-        :return:
-        """
-        return self.length * 8
