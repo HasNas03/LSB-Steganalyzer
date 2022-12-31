@@ -30,8 +30,35 @@ def b2a(char: str):
     return ASCII_value
 
 
-print(a2b("100"))
-print(b2a("01100010011000000110011"))
+print(a2b("Hasan"))
+#print(b2a("01100010011000000110011"))
 
 l = "01100010011000000110000"
 print(l[:-2])
+def string_to_binary(text: str) -> str:
+    binary_list = []
+    # Iterate through each character in the text
+    for char in text:
+        # Convert the character to its ASCII representation and then to binary
+        binary = bin(ord(char))[2:]
+        # Pad the binary representation with leading zeros to make it 8 digits long
+        binary = '0' * (8 - len(binary)) + binary
+        # Add the binary representation to the list
+        binary_list.append(binary)
+    # Join the binary representations into a single string and return it
+    return ''.join(binary_list)
+
+
+def binary_to_string(binary: str) -> str:
+    # Split the binary string into a list of 8-digit binary strings
+    binary_list = [binary[i:i + 8] for i in range(0, len(binary), 8)]
+    # Initialize an empty string to store the decoded text
+    text = ''
+    # Iterate through each 8-digit binary string
+    for b in binary_list:
+        # Convert the binary string to an integer and then to its ASCII representation
+        char = chr(int(b, 2))
+        # Add the character to the decoded text
+        text += char
+    # Return the decoded text
+    return text

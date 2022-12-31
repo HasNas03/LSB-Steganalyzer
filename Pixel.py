@@ -1,32 +1,5 @@
-import binascii
+from Embedder import a2b, b2a
 
-
-
-def a2b(char: str) -> str:
-    """
-    Return the binary representation of an ASCII character
-    """
-    # string.encode() function turns the specified string into an array of bytes
-    byte_array = char.encode()
-    # Convert the byte_array into a binary integer
-    binary_int = int.from_bytes(byte_array, "big")
-    # Convert binary_int to a string of binary characters
-    binary_string = bin(binary_int)
-    return binary_string[0] + binary_string[2:]
-def b2a(char: str):
-    """
-        Return the ASCII representation of a binary string
-        """
-    input_string = int(char, 2)
-    # Obtain the total number of bytes
-    Total_bytes = (input_string.bit_length() + 7) // 8
-
-    # Convert these bits to bytes
-    input_array = input_string.to_bytes(Total_bytes, "big")
-
-    # Convert the bytes to an ASCII value and display it on the output screen
-    ASCII_value = input_array.decode()
-    return ASCII_value
 
 class Pixel():
 
@@ -34,15 +7,13 @@ class Pixel():
         """
 
         """
-        self.red = redval
-        self.green = greenval
-        self.blue = blueval
+        self.lowest_rgb_value = None
         self.lowest_rgb_binary = None
         self.lowest_rgb_index = None
-        self.rgb_list = [self.red, self.green, self.blue]
+        self.rgb_list = [redval, greenval, blueval]
 
-    def lowest_rgb2binary(self) -> None:
-        """
+    def fun1(self) -> None:
+        """ #lowest_rgb2binary
         Return a 2-tuple (x,y), where:
         x: the value of the lowest rgb value (in ASCII)
         y: the index of that lowest value in self.rgb_list, meaning a 0, 1, or
@@ -52,8 +23,8 @@ class Pixel():
         self.lowest_rgb_index = self.rgb_list.index(self.lowest_rgb_value)
         self.lowest_rgb_binary = a2b(str(self.lowest_rgb_value))
 
-    def least_color2binary(self, bits: str) -> str:
-        """
+    def fun2(self, bits: str) -> str:
+        """#least_color2binary
 
         :param bits:
         :return:
@@ -68,14 +39,13 @@ class Pixel():
         :param new_bits:
         :return:
         """
-        self.lowest_rgb2binary()
+        self.fun1()
         new_pixel_rgb = self.rgb_list[:]
-        new_pixel_rgb[self.lowest_rgb_index] = self.least_color2binary(new_bits)
+        new_pixel_rgb[self.lowest_rgb_index] = self.fun2(new_bits)
         return str(new_pixel_rgb[0]) + str(new_pixel_rgb[1]) + str(new_pixel_rgb[2])
 
 
 p = Pixel(200, 100, 250)
 print(p.embed("11"))
-
-
 # should get Pixel(200, 103, 250)
+
