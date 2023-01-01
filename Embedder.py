@@ -1,6 +1,6 @@
 
 
-class Embedder():
+class Embedder:
     """
     The main class handling text-embedding into the image
 
@@ -16,10 +16,6 @@ class Embedder():
         self.image = image
 
     def enough_pixels(self) -> bool:
-        """
-        Returns a Boolean of whether there are enough pixels in the image to
-        successfully embed the text
-        """
         return len(self.text) <= ... #image pixels / 4, since last 2 bits are
         # holding the text bits, so 4 pixels are needed since 2 * 4 = 8
 # def a2b(char: str) -> str:
@@ -47,7 +43,8 @@ class Embedder():
 #         return ASCII_value
 def a2b(text: str) -> str:
     """
-    Return the binary representation of the ASCII string
+    :param text: a string of text to be converted
+    :return: The binary representation of the ASCII string
     """
     binary_val = []
     # Iterate through each character in the text
@@ -64,7 +61,8 @@ def a2b(text: str) -> str:
 
 def b2a(binary: str) -> str:
     """
-    Return the ASCII representation of the binary string
+    :param binary: a string of a binary number
+    :return: The ASCII representation of the binary string
     """
     binary_list = []
     # Split the binary string into a list of 8-digit binary strings
