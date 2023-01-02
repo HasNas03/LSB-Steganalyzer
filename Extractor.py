@@ -11,7 +11,6 @@ class Extractor:
     will stop and the message will be returned. (So we won't need to go over
     every single pixel wastefully)
 
-
     Instructions:
 
     1. Make a method that takes in a pixel and converts the lowest rgb-value to
@@ -26,7 +25,8 @@ class Extractor:
     def __init__(self):
         self.pixel_array = ...
         self.flattened_array = []
-
+        self.pixel_count = 0
+        self.arrow = 0
 
     def pixel_array_flattener(self) -> list:
         """
@@ -36,7 +36,6 @@ class Extractor:
         for row in self.pixel_array:
             self.flattened_array.extend(row)
         return self.flattened_array
-
 
     def bits_extractor(self, pixel: Pixel) -> chr:
         """

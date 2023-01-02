@@ -78,7 +78,7 @@
 #
 #     [   [255, 255, 255], [255, 255, 255], [255, 255, 255], [255, 255, 255], [255, 255, 255]   ]
 #     ]
-
+from PIL import Image
 
 
 array = [[1, 2, 3, 4, 5],
@@ -198,4 +198,80 @@ v = 1920 * 1880
 i = 0
 for j in range(v):
     i+=1
-print(i)
+#print(i)
+# def a2b(char: str) -> str:
+#         """
+#         Return the binary representation of an ASCII character
+#         """
+#         # string.encode() function turns the specified string into an array of bytes
+#         byte_array = char.encode()
+#         # Convert the byte_array into a binary integer
+#         binary_int = int.from_bytes(byte_array, "big")
+#         # Convert binary_int to a string of binary characters
+#         binary_string = bin(binary_int)
+#         return binary_string[0] + binary_string[2:]
+# def b2a(char: str):
+#         """
+#         Return the ASCII representation of a binary string
+#         """
+#         input_string = int(char, 2)
+#         # Obtain the total number of bytes
+#         Total_bytes = (input_string.bit_length() + 7) // 8
+#         # Convert these bits to bytes
+#         input_array = input_string.to_bytes(Total_bytes, "big")
+#         # Convert the bytes to an ASCII value and display it on the output screen
+#         ASCII_value = input_array.decode()
+#         return ASCII_value
+
+#
+#
+# text_index = 0
+# while text_index < 20:
+#         print(text_index)
+#         text_index += 1
+#
+# print(text_index + 100)
+
+
+from PIL import Image
+
+def get_image_pixels(image_path: str) -> list:
+    # Open the image
+    with Image.open(image_path) as image:
+        # Get the pixel data as a 2D list of tuples
+        pixels = list(image.getdata())
+        # Convert each tuple to a list and return the 2D list of pixels
+        return [[pixel for pixel in t[0:3]] for t in pixels]
+
+
+#print(get_image_pixels("/Users/hasannasir/Desktop/general/testpic.png"))
+
+
+def a2b(text: str) -> str:
+    """
+    :param text: a string of text to be converted
+    :return: The binary representation of the ASCII string
+    """
+    if text.isnumeric():
+        return bin(int(text))
+    binary_val = []
+    # Iterate through each character in the text
+    for char in text:
+        # Convert the character to its ASCII representation and then to binary
+        binary = bin(ord(char))[2:]
+        # Pad the binary representation with leading zeros to make it 8 digits long
+        binary = '0' * (8 - len(binary)) + binary
+        # Add the binary representation to the list
+        binary_val.append(binary)
+    # Join the binary representations into a single string and return it
+    return ''.join(binary_val)
+
+
+for i in range(0,16):
+    v = a2b(str(i))
+    v2 = ("0" * (8-len(v[2:]))) + v[2:]
+    l = (i, v2, len(v2))
+    print(l)
+
+# for c in "abcdABCD":
+#     print(a2b(c))
