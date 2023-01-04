@@ -51,7 +51,7 @@ class Extractor:
         :param b1, b2, b3, b4: the 4 bit pairs, each from their own Pixel
         :return: The byte achieved when combining all 4 bit pairs
         """
-        if len(b1) == 2 and len(b2) == 2 and len(b3) == 2 and len(b4) == 2:
+        if all(len(x) == 2 for x in [b1, b2, b3, b4]):
             char_byte = b1 + b2 + b3 + b4
             char = b2a(char_byte)
             if type(char) == chr:

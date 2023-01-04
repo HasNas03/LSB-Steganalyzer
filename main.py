@@ -241,10 +241,42 @@ def get_image_pixels(image_path: str) -> list:
         # Get the pixel data as a 2D list of tuples
         pixels = list(image.getdata())
         # Convert each tuple to a list and return the 2D list of pixels
-        return [[pixel for pixel in t[0:3]] for t in pixels]
+        return [[pixel for pixel in t] for t in pixels]
 
 
-#print(get_image_pixels("/Users/hasannasir/Desktop/general/testpic.png"))
+# print(get_image_pixels("/Users/hasannasir/Desktop/general/testpic.png"))
+
+
+def pixel_extractor(image_path: str):
+    i = 0
+    with Image.open(image_path) as image:
+        # Get the pixel data as a 2D list of tuples
+        pixels = list(image.getdata())
+        # return the 2D list of pixels
+        result = []
+        for t in pixels:
+            sublist = []
+            for pixel in t[0:3]:
+                i += 1
+                sublist.append(pixel)
+            result.append(sublist)
+        # return result
+        return i
+
+#print(pixel_extractor("/Users/hasannasir/Desktop/Screenshot 2023-01-02 at 8.32.11 PM.png"))
+
+# image = [
+#
+#     [   [255, 255, 255], [255, 255, 255], [255, 255, 255], [255, 255, 255], [255, 255, 255]   ],
+#
+#     [   [255, 255, 255], [255, 255, 255], [255, 255, 255], [255, 255, 255], [255, 255, 255]   ],
+#
+#     [   [255, 255, 255], [255, 255, 255], [255, 255, 255], [255, 255, 255], [255, 255, 255]   ],
+#
+#     [   [255, 255, 255], [255, 255, 255], [255, 255, 255], [255, 255, 255], [255, 255, 255]   ],
+#
+#     [   [255, 255, 255], [255, 255, 255], [255, 255, 255], [255, 255, 255], [255, 255, 255]   ]
+#     ]
 
 
 def a2b(text: str) -> str:
@@ -267,11 +299,86 @@ def a2b(text: str) -> str:
     return ''.join(binary_val)
 
 
-for i in range(0,16):
-    v = a2b(str(i))
-    v2 = ("0" * (8-len(v[2:]))) + v[2:]
-    l = (i, v2, len(v2))
-    print(l)
+# for i in range(0,16):
+#     v = a2b(str(i))
+#     v2 = ("0" * (8-len(v[2:]))) + v[2:]
+#     l = (i, v2, len(v2))
+#     print(l)
 
 # for c in "abcdABCD":
 #     print(a2b(c))
+
+
+
+
+
+
+# NO LONGER NEEDED
+#     def pixel_extractor(self, image_path: str) -> list:
+#         with Image.open(image_path) as image:
+#             # Get the pixel data as a 2D list of tuples
+#             pixels = list(image.getdata())
+#             # return the 2D list of pixels
+#             result = []
+#             for t in pixels:
+#                 sublist = []
+#                 for pixel in t[0:3]:
+#                     sublist.append(pixel)
+#                 result.append(sublist)
+#             self.pixel_array = result
+#             return result
+#             # return [[pixel for pixel in t[0:3]] for t in pixels]
+
+g = [1,2,3,4]
+#print(list(g))
+import os
+
+def pixel_extraction2(self):
+    # Check if the file exists
+    if not os.path.exists(self):
+        raise ValueError("File does not exist")
+    # Open the image and get the size
+    image = Image.open(self)
+    width, height = image.size
+    # Get the pixel data as a list of tuples
+    pixels = list(image.getdata())
+    # Convert the list of tuples to a 2D list
+    result = []
+    for i in range(0, len(pixels), width):
+        result.append(pixels[i:i + width])
+    s = 0
+    for i in result:
+        s += len(i)
+    v = (result, s)
+    return v
+
+
+#print(pixel_extraction2("/Users/hasannasir/Desktop/BABA.png"))
+
+old = [[(108, 61, 39, 255), (108, 60, 34, 255),
+      (118, 70, 43, 255), (121, 73, 46, 255)],
+     [(106, 58, 37, 255), (107, 59, 33, 255),
+      (118, 70, 44, 255), (122, 74, 47, 255)],
+       # below is same
+     [(102, 54, 34, 255), (106, 58, 32, 255),
+      (121, 73, 46, 255), (126, 78, 51, 255)],
+     [(110, 62, 41, 255), (109, 60, 34, 255),
+      (122, 72, 46, 255), (126, 76, 50, 255)],
+     [(112, 64, 43, 255), (111, 61, 36, 255),
+      (122, 72, 46, 255), (125, 75, 49, 255)],
+     [(111, 63, 42, 255), (119, 69, 43, 255),
+      (121, 71, 46, 255), (120, 70, 45, 255)]]
+
+new = [[(108, 61, 37, 255), (108, 60, 34, 255),
+      (118, 70, 41, 255), (121, 73, 47, 255)],
+     [(106, 58, 37, 255), (107, 59, 34, 255),
+      (118, 70, 47, 255), (122, 74, 46, 255)],
+       # below is same
+     [(102, 54, 34, 255), (106, 58, 32, 255),
+      (121, 73, 46, 255), (126, 78, 51, 255)],
+     [(110, 62, 41, 255), (109, 60, 34, 255),
+      (122, 72, 46, 255), (126, 76, 50, 255)],
+     [(112, 64, 43, 255), (111, 61, 36, 255),
+      (122, 72, 46, 255), (125, 75, 49, 255)],
+     [(111, 63, 42, 255), (119, 69, 43, 255),
+      (121, 71, 46, 255), (120, 70, 45, 255)]]
